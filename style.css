@@ -275,7 +275,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 30px;
 }
 
 .winning-sign-img {
@@ -332,4 +332,17 @@ body {
 #restart:active,
 #new-game:active {
   transform: translate(-1px, 1px);
+}
+
+/* Media */
+
+@media (max-width: 480px) {
+  .winning-message-text {
+    font-size: 27px;
+  }
+
+  .winning-sign-img {
+    width: 56px;
+    height: 56px;
+  }
 }
