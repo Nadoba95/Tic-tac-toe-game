@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      type="image/svg"
+      sizes="32x32"
+      href="./images/SVG/logo.svg"
+    />
+    <title>Tic tac toe</title>
+  </head>
+  <body>
+    <div class="new-menu">
+      <div class="logo"></div>
+      <div class="new-menu__body">
+        <p class="new-menu__desc">PICK PLAYER 1'S MARK</p>
+        <div class="choose-sign-bg">
+          <div class="x-sign-bg active">
+            <div class="x-sign"></div>
+          </div>
+          <div class="o-sign-bg">
+            <div class="o-sign"></div>
+          </div>
+        </div>
+        <p class="new-menu__desc">REMEMBER: X GOES FIRST</p>
+      </div>
+      <button id="new-game">NEW GAME</button>
+    </div>
+    <main class="container hidden">
+      <div class="header">
+        <div class="logo"></div>
+        <div class="header__switch">
+          <div class="header__switch__player"></div>
+          <div>TURN</div>
+        </div>
+        <button id="btn-restart"><div class="icon-restart"></div></button>
+      </div>
+      <div class="board" id="board">
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+      </div>
+      <div class="result-cells">
+        <div class="result-cell result-cell--x">
+          <div class="result-cell__text result-cell__text--x">PLAYER 1</div>
+          <div class="result-cell__number result-cell__number--x">0</div>
+        </div>
+        <div class="result-cell result-cell--tie">
+          <div class="result-cell__text result-cell__text--tie">TIES</div>
+          <div class="result-cell__number result-cell__number--tie">0</div>
+        </div>
+        <div class="result-cell result-cell--o">
+          <div class="result-cell__text result-cell__text--o">PLAYER 2</div>
+          <div class="result-cell__number result-cell__number--o">0</div>
+        </div>
+      </div>
+    </main>
+    <div class="restart-game-fixed hidden">
+      <div class="restart-game">
+        <div data-restart-game-text>RESTART GAME?</div>
+        <div>
+          <button id="cancel">NO, CANCEL</button>
+          <button id="restart">YES, RESTART</button>
+        </div>
+      </div>
+    </div>
+    <div class="winning-message-fixed hidden">
+      <div class="winning-message">
+        <div data-winner></div>
+        <div>
+          <div class="winning-sign-img"></div>
+          <div class="winning-message-text"></div>
+        </div>
+        <div>
+          <button id="quit">QUIT</button>
+          <button id="next-round">NEXT ROUND</button>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
