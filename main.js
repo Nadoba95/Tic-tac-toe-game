@@ -56,7 +56,7 @@ function startGame() {
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
-    cell.addEventListener("click", handleClick, { once: true });
+    cell.addEventListener("click", handleClick);
   });
 
   setBoardHoverClass();
@@ -164,6 +164,7 @@ function isDraw() {
 
 function placeMark(cell, currentClass) {
   cell.classList.add(currentClass);
+  cell.removeEventListener("click", handleClick);
 }
 
 function swapTurns() {
