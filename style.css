@@ -126,7 +126,8 @@ body {
 #next-round,
 #cancel,
 #restart,
-#new-game {
+#new-game,
+#vsCPU {
   background-color: #a8bfc9;
   border-radius: 10px;
   border: none;
@@ -309,7 +310,13 @@ body {
   box-shadow: 0px 3px 1px 0px #cc8b13;
 }
 
-#new-game {
+#vsCPU {
+  background-color: #31c3bd;
+  box-shadow: 0px 3px 1px 0px #0f8c9e;
+}
+
+#new-game,
+#vsCPU {
   width: 100%;
 }
 
@@ -317,6 +324,10 @@ body {
 #restart:hover,
 #new-game:hover {
   background-color: #ffcf76;
+}
+
+#vsCPU:hover {
+  background-color: #0f8c9e;
 }
 
 #btn-restart:hover,
@@ -330,7 +341,8 @@ body {
 #next-round:active,
 #cancel:active,
 #restart:active,
-#new-game:active {
+#new-game:active,
+#vsCPU:active {
   transform: translate(-1px, 1px);
 }
 

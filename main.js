@@ -40,9 +40,11 @@ const btnNextRound = document.getElementById("next-round");
 const btnCancel = document.getElementById("cancel");
 const btnRestart = document.getElementById("restart");
 const btnNewGame = document.getElementById("new-game");
+const btnVsCPU = document.getElementById("vsCPU");
 const btnQuit = document.getElementById("quit");
 
 let circleTurn = false;
+let vsComputer = null;
 let x = 0;
 let o = 0;
 let tie = 0;
@@ -60,6 +62,13 @@ function startGame() {
   setBoardHoverClass();
   hideWinningMessage();
   hideRestartMessage();
+
+  if (!backgroundX.classList.contains("active")) {
+    const timer = setTimeout(() => {
+      computerTurn(X_CLASS);
+      return () => clearTimeout(timer);
+    }, 100);
+  }
 }
 
 function handleClick(e) {
@@ -67,7 +76,42 @@ function handleClick(e) {
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 
   placeMark(cell, currentClass);
+  checkGameStatus(currentClass);
 
+  if (vsComputer) {
+    if (backgroundX.classList.contains("active")) {
+      if (circleTurn) {
+        const timer = setTimeout(() => {
+          computerTurn(CIRCLE_CLASS);
+          return () => clearTimeout(timer);
+        }, 300);
+      }
+    } else {
+      if (!circleTurn) {
+        const timer = setTimeout(() => {
+          computerTurn(X_CLASS);
+          return () => clearTimeout(timer);
+        }, 300);
+      }
+    }
+  }
+}
+
+function computerTurn(currentClass) {
+  const emptyCells = [...cellElements].filter((cell) => {
+    return (
+      !cell.classList.contains(X_CLASS) &&
+      !cell.classList.contains(CIRCLE_CLASS)
+    );
+  });
+
+  const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+  placeMark(randomCell, currentClass);
+  checkGameStatus(currentClass);
+}
+
+function checkGameStatus(currentClass) {
   if (checkWin(currentClass)) {
     endGame(false);
   } else if (isDraw()) {
@@ -181,8 +225,6 @@ function pickX(e) {
   if (element.matches(".x-sign") || element.matches(".x-sign-bg")) {
     backgroundO.classList.remove("active");
     backgroundX.classList.add("active");
-    playerX.innerHTML = `PLAYER 1`;
-    playerO.innerHTML = `PLAYER 2`;
   }
 }
 
@@ -191,14 +233,22 @@ function pickO(e) {
   if (element.matches(".o-sign") || element.matches(".o-sign-bg")) {
     backgroundX.classList.remove("active");
     backgroundO.classList.add("active");
-    playerX.innerHTML = `PLAYER 2`;
-    playerO.innerHTML = `PLAYER 1`;
   }
 }
 
 function newGame() {
+  vsComputer = false;
   newMenuElement.classList.add("hidden");
   containerElement.classList.remove("hidden");
+
+  if (backgroundX.classList.contains("active")) {
+    playerX.innerHTML = `PLAYER 1`;
+    playerO.innerHTML = `PLAYER 2`;
+  } else {
+    playerX.innerHTML = `PLAYER 2`;
+    playerO.innerHTML = `PLAYER 1`;
+  }
+
   startGame();
 }
 
@@ -209,6 +259,20 @@ function quitGame() {
   restartRound();
 }
 
+function startVsCPU() {
+  newGame();
+
+  if (backgroundX.classList.contains("active")) {
+    playerX.innerHTML = `PLAYER`;
+    playerO.innerHTML = `CPU`;
+  } else {
+    playerX.innerHTML = `CPU`;
+    playerO.innerHTML = `PLAYER`;
+  }
+
+  vsComputer = true;
+}
+
 btnShowRestartMessage.addEventListener("click", showRestartMessage);
 btnCancel.addEventListener("click", hideRestartMessage);
 btnRestart.addEventListener("click", restartRound);
@@ -217,3 +281,4 @@ backgroundX.addEventListener("click", pickX);
 backgroundO.addEventListener("click", pickO);
 btnQuit.addEventListener("click", quitGame);
 btnNewGame.addEventListener("click", newGame);
+btnVsCPU.addEventListener("click", startVsCPU);
